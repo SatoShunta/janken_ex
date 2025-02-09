@@ -1,30 +1,36 @@
-import player
-import computer
-import janken_judge
-# ユーザの手
-U_hand = -1
-# PCの手
-P_hand = -1
-win = 0
-lose = 0
-Tie = 0
+# janken.py
+from player import pon as human_pon
+from computer import pon as cpu_pon
+from janken_judge import judge
 
-for _ in range(3):
-    U_hand = player.user_pon()
-    P_hand = computer.cpu_pon()
-    judge = janken_judge.judge(U_hand,P_hand)
-    if judge == 'win':
-        win += 1
-    elif judge == 'lose':
-        lose += 1
-    elif judge == 'Tie':
-        Tie += 1
+def janken_main():
+    user_wins = 0
+    cpu_wins = 0
 
-print("【最終結果】")
-if win > lose:
-    print(f"あなた:{win}勝\nコンピュータ:{lose}勝\nあなたの総合勝利です!")
-elif win < lose:
-    print(f"あなた:{win}勝\nコンピュータ:{lose}勝\nコンピューターの総合勝利です!")
-else:
-    print(f"あなた:{win}勝\nコンピュータ:{lose}勝\nあなたの引き分けです!")
-    
+    for _ in range(3):
+        user_hand = human_pon()
+        cpu_hand = cpu_pon()
+
+        print(f"あなたの手: {user_hand}, コンピュータの手: {cpu_hand}")
+
+        result = judge(cpu_hand, user_hand)
+        print(f"結果: {result}")
+
+        if result == "あなたの勝ち":
+            user_wins += 1
+        elif result == "コンピュータの勝ち":
+            cpu_wins += 1
+
+    print("\n最終結果:")
+    print(f"あなたの勝ち数: {user_wins}")
+    print(f"コンピュータの勝ち数: {cpu_wins}")
+
+    if user_wins > cpu_wins:
+        print("あなたの総合勝利！")
+    elif cpu_wins > user_wins:
+        print("コンピュータの総合勝利！")
+    else:
+        print("総合引き分け！")
+
+if __name__ == "__main__":
+    janken_main()

@@ -1,17 +1,14 @@
-# ユーザの手
-U_hand = -1
+# player.py
+def pon():
+    while True:
+        user_input = input("じゃんけんの手を入力してください (1: グー, 2: チョキ, 3: パー): ")
 
-def user_pon():
-    while(True):
-        U_hand = int(input('1.グー 2.チョキ 3.パー\nグー、チョキ、パーのいずれかを入力してください＞'))
-        if(U_hand == 1 or U_hand == 2 or U_hand == 3):
-            if U_hand == 1:
-                print(f'あなたの手：グー')
-            elif U_hand == 2:
-                print(f'あなたの手：チョキ')
-            else:
-                print(f'あなたの手：パー')
-            return U_hand
-            break
+        if user_input in ['1', '2', '3']:
+            if user_input == '1':
+                return 'グー'
+            elif user_input == '2':
+                return 'チョキ'
+            elif user_input == '3':
+                return 'パー'
         else:
-            print('1,2,3のどれかを入力してください')
+            print("無効な入力です。1, 2, 3のいずれかを半角数字で入力してください。")
